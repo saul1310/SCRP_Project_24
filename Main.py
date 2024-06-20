@@ -8,6 +8,15 @@ def open_tasks():
     label = tk.Label(new_window, text="Tasks")
     label.pack(pady=20)
 
+    # need to have spaces for tasks with name and description coming from open_new_tasks , create a grid of boxes 
+
+    # order for making new task in open_tasks page: ->
+    # button is pressed in create_new_task page setting varibles to entered info 
+    # check for open space, maybe use array, 1 is occupied, 0 is free
+    # have box with same number as first free zero hold the new task, setting the box#.name and box#.desc to the info from the tk if none are free alert the user that it cant be completed 
+    
+
+
     new_button = tk.Button(new_window, text="New Button", command=lambda: print("New button clicked!"))
     new_button.pack(pady=20)
 
