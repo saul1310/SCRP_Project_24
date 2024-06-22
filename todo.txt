@@ -1,0 +1,7 @@
+to do:
+
+    write descirption updating into task list
+
+    add function for when task list is full and new task is added- maybe hold task until one opens up 
+
+    add login 

@@ -4,14 +4,12 @@ root = tk.Tk()
 root.title("Software-window")
 root.geometry("1000x1000")
 
-task0_name = ""
-task1_name = ""
-task2_name = ""
-task3_name = ""
-task4_name = ""
-task5_name = ""
-
 tasks_status = [0, 0, 0, 0, 0]
+tasks_names = [""] * 5
+tasks_descriptions = [""] * 5
+
+current_task_title = ""
+current_task_description = ""
 
 def open_tasks():
     new_window = tk.Toplevel(root)
@@ -24,7 +22,6 @@ def open_tasks():
     canvas = tk.Canvas(new_window, width=1800, height=800, bg="white")
     canvas.pack()
 
-    # Create a rectangle on the canvas
     taskboxes = [
         canvas.create_rectangle(50, 50, 300, 500, fill="white", outline="black"),
         canvas.create_rectangle(350, 50, 600, 500, fill="white", outline="black"),
@@ -41,19 +38,26 @@ def open_tasks():
         canvas.create_text(1375, 90, text="", fill="black")
     ]
 
-    def update_task_boxes():
-        for i, status in enumerate(tasks_status):
-            if status == 0:
-                canvas.itemconfig(task_texts[i], text="empty")
-            else:
-                canvas.itemconfig(task_texts[i], text="task name")
+    tasks_descriptions=[
+        canvas.create_text(175,120,text="description ",fill ="black")
 
-    update_task_boxes()
+
+    ]
+
+    update_task_boxes(canvas, task_texts)
 
     new_button = tk.Button(new_window, text="New Button", command=lambda: print("New button clicked!"))
     new_button.pack(pady=20)
 
+def update_task_boxes(canvas, task_texts):
+    for i, status in enumerate(tasks_status):
+        if status == 0:
+            canvas.itemconfig(task_texts[i], text="Empty")
+        else:
+            canvas.itemconfig(task_texts[i], text=tasks_names[i])
+
 def open_new_task():
+    global current_task_title, current_task_description
     new_window = tk.Toplevel(root)
     new_window.title("New Task")
     new_window.geometry("400x500")
@@ -71,18 +75,20 @@ def open_new_task():
     new_task_description = tk.StringVar()
     entry2 = tk.Entry(new_window, textvariable=new_task_description, width=30)
     entry2.pack(pady=20)
-
-    def get_input():
-        user_input = new_task_title.get()
-        user_input2 = new_task_description.get()
-        print("User input:", user_input, user_input2)
-        # Update the task status (for demonstration purposes, we'll just update the first available spot)
+    
+    def upload_task():
+        global current_task_title, current_task_description
+        current_task_title = new_task_title.get()
+        current_task_description = new_task_description.get()
         for i in range(len(tasks_status)):
             if tasks_status[i] == 0:
-                tasks_status[i] = 1  # Mark the task as occupied
+                tasks_status[i] = 1
+                tasks_names[i] = current_task_title
+                tasks_descriptions[i] = current_task_description
                 break
+    
 
-    button = tk.Button(new_window, text="Create Task", command=get_input)
+    button = tk.Button(new_window, text="Create Task", command=upload_task)
     button.pack(pady=20)
 
 def on_task_clicked():
