@@ -4,4 +4,8 @@ to do:
 
     add function for when task list is full and new task is added- maybe hold task until one opens up 
 
-    add login 
+    add login functionality 
+
+    add json file to store data 
+
+    text is going outside of cells for description 

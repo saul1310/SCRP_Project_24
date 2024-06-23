@@ -39,7 +39,7 @@ def open_tasks():
     ]
 
     tasks_descriptions=[
-        canvas.create_text(175,120,text="description ",fill ="black")
+        canvas.create_text(175,120,text="someone once told me the world wqas going to rol me i aint the sharpesdt tolo,in the shed ",fill ="black")
 
 
     ]
