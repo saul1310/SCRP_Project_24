@@ -1,8 +1,13 @@
 import tkinter as tk
+from tkinter import PhotoImage
+
 
 root = tk.Tk()
 root.title("Software-window")
 root.geometry("1000x1000")
+
+# Add background image
+
 
 tasks_status = [0, 0, 0, 0, 0]
 tasks_names = [""] * 5
@@ -11,10 +16,16 @@ tasks_descriptions = [""] * 5
 current_task_title = ""
 current_task_description = ""
 
+
+def open_login():
+    new_window=tk.Toplevel(root)
+    new_window.title="login"
+    new_window.geometry="500x500"
 def open_tasks():
     new_window = tk.Toplevel(root)
     new_window.title("Tasks")
     new_window.geometry("1800x800")
+
 
     label = tk.Label(new_window, text="Tasks")
     label.pack(pady=20)
@@ -38,23 +49,27 @@ def open_tasks():
         canvas.create_text(1375, 90, text="", fill="black")
     ]
 
-    tasks_descriptions=[
-        canvas.create_text(175,120,text="someone once told me the world wqas going to rol me i aint the sharpesdt tolo,in the shed ",fill ="black")
-
-
+    task_descriptions = [
+        canvas.create_text(175, 120, text="", fill="black"),
+        canvas.create_text(475, 120, text="", fill="black"),
+        canvas.create_text(775, 120, text="", fill="black"),
+        canvas.create_text(1075, 120, text="", fill="black"),
+        canvas.create_text(1375, 120, text="", fill="black")
     ]
 
-    update_task_boxes(canvas, task_texts)
+    update_task_boxes(canvas, task_texts, task_descriptions)
 
     new_button = tk.Button(new_window, text="New Button", command=lambda: print("New button clicked!"))
     new_button.pack(pady=20)
 
-def update_task_boxes(canvas, task_texts):
+def update_task_boxes(canvas, task_texts, task_descriptions):
     for i, status in enumerate(tasks_status):
         if status == 0:
             canvas.itemconfig(task_texts[i], text="Empty")
+            canvas.itemconfig(task_descriptions[i], text="")
         else:
             canvas.itemconfig(task_texts[i], text=tasks_names[i])
+            canvas.itemconfig(task_descriptions[i], text=tasks_descriptions[i])
 
 def open_new_task():
     global current_task_title, current_task_description
@@ -87,7 +102,6 @@ def open_new_task():
                 tasks_descriptions[i] = current_task_description
                 break
     
-
     button = tk.Button(new_window, text="Create Task", command=upload_task)
     button.pack(pady=20)
 
@@ -96,6 +110,9 @@ def on_task_clicked():
 
 def on_new_task_clicked():
     open_new_task()
+
+def on_login_clicked():
+    open_login()
 
 canvas = tk.Canvas(root, width=1000, height=1000)
 rectangle = canvas.create_rectangle(0, 0, 150, 1000, fill="white", outline="black")
@@ -109,7 +126,7 @@ new_task_button = tk.Button(root, text="Create New Task", width=20, command=on_n
 new_task_button.pack()
 new_task_button.place(x=0, y=25)
 
-login_button = tk.Button(root, text="Login", width=20, command=on_new_task_clicked)
+login_button = tk.Button(root, text="Login", width=20, command=on_login_clicked)
 login_button.pack()
 login_button.place(x=0, y=50)
 
