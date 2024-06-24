@@ -20,7 +20,13 @@ current_task_description = ""
 def open_login():
     new_window=tk.Toplevel(root)
     new_window.title="login"
-    new_window.geometry="500x500"
+    new_window.geometry="1800x1000"
+    label = tk.Label(new_window, text="Enter username")
+    entry = tk.Entry(new_window, textvariable="test", width=30)
+    entry.pack(pady=20)
+    label.pack(pady=20)
+
+
 def open_tasks():
     new_window = tk.Toplevel(root)
     new_window.title("Tasks")
